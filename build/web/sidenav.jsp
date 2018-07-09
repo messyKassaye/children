@@ -14,7 +14,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://cijulenlinea.ucr.ac.cr/dev-users/">
+            <a class="navbar-brand" href="dashboard" style="text-align: center;margin-top: 20px;">
                 Dashboard
             </a>
         </div>
@@ -29,7 +29,7 @@
                     <li><a href="#"><i class="fa fa-fw fa-user"></i> Edit Profile</a></li>
                     <li><a href="#"><i class="fa fa-fw fa-cog"></i> Change Password</a></li>
                     <li class="divider"></li>
-                    <li><a href="#"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
+                    <li><a href="Logout"><i class="fa fa-fw fa-power-off"></i> Logout</a></li>
                 </ul>
             </li>
         </ul>
@@ -38,7 +38,7 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
             <div class="col-md-12 col-lg-12 col-sm-12" style="margin-bottom: 40px;text-align: center;">
-                <img src="resources/images/featured_child.jpg" class="img-circle img-responsive center-block" style="width: 80px;height: 80px;margin-top: 20px;margin-bottom: 15px;">
+                <img src="http://localhost:8080/children/resources/images/featured_child.jpg" class="img-circle img-responsive center-block" style="width: 80px;height: 80px;margin-top: 20px;margin-bottom: 15px;">
                 <a href="#" class="text-info">
 
                     <%=auth.get(0).getFirst_name() + " " + auth.get(0).getLast_name()%>
@@ -48,26 +48,27 @@
             <li>
                 <a href="#" data-toggle="collapse" data-target="#submenu-1"><i class="fa fa-fw fa-child"></i> Children<i class="fa fa-fw fa-angle-down pull-right"></i></a>
                 <ul id="submenu-1" class="collapse submenus">
-                    <li><a href="#"><i class="fa fa-female"></i>   Boy</a></li>
-                    <li><a href="#"><i class="fa fa-female"></i>  Female</a></li>
-                    <li><a href="#"><i class="fa fa-university"></i> at school</a></li>
-                    <li><a href="#"><i class="fa fa-user-plus"></i> with family</a></li>
-                    <li><a href="#"><i class="fa fa-money"></i> most need sponsor</a></li>
+                    <li><a href="childrenRegistration"><i class="fa fa-female"></i>   Register Children</a></li>
+                    <li><a href="showChildren?req=male"><i class="fa fa-female"></i>   Boy</a></li>
+                    <li><a href="showChildren?req=female"><i class="fa fa-female"></i>  Female</a></li>
+                    <li><a href="showChildren?req=school-yes"><i class="fa fa-university"></i> at school</a></li>
+                    <li><a href="showChildren?req=family"><i class="fa fa-user-plus"></i> with family</a></li>
+                    <li><a href="showChildren?req=need-sponsor"><i class="fa fa-money"></i> most need sponsor</a></li>
 
                 </ul>
             </li>
             <li>
                 <a href="#" data-toggle="collapse" data-target="#submenu-2"><i class="fa fa-users "></i>  Staffs <i class="fa fa-fw fa-angle-down pull-right"></i></a>
                 <ul id="submenu-2" class="collapse submenus">
-                    <li><a href="#"><i class="fa fa-database"></i> Data Collector</a></li>
-                    <li><a href="#"><i class="fa fa-meanpath"></i> Mentor</a></li>
+                    <li><a href="#"><i class="fa fa-database"></i> Add</a></li>
+                    <li><a href="#"><i class="fa fa-meanpath"></i> Show</a></li>
                 </ul>
             </li>
             <li>
                 <a href="#" data-toggle="collapse" data-target="#submenu-3"><i class="fa fa-tasks"></i> What we do <i class="fa fa-fw fa-angle-down pull-right"></i></a>
                 <ul id="submenu-3" class="collapse submenus">
-                    <li><a href="#"><i class="fa fa-plus"></i> add new</a></li>
-                    <li><a href="#"><i class="fa fa-eye"></i> Show our works</a></li>
+                    <li><a href="AddWhatWeDo"><i class="fa fa-plus"></i> add our works</a></li>
+                    <li><a href="ShowWhatWeDo"><i class="fa fa-eye"></i> Show our works</a></li>
                 </ul>
             </li>
             <li>

@@ -6,13 +6,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="http://localhost:8080/Children/" class="navbar-brand">Child Care</a>
+                <a href="index" class="navbar-brand">Child Care</a>
             </div>
 
             <div class="collapse navbar-collapse" id="myMenu">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="login.jsp">Login</a></li>
-                    <li><a href="signup.jsp">Sign up</a></li>
+                    <li><a href="login">Login</a></li>
+                    <li><a href="signup">Sign up</a></li>
                 </ul>
             </div>
         </div>

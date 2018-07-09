@@ -34,14 +34,14 @@ public class WhatWeDos {
         String query = "select * from what_we_dos w, covers c where c.foreign_id=w.id";
         try {
             ps = connection.prepareStatement(query);
-
             rs = ps.executeQuery();
             while (rs.next()) {
                 WhatWeDo what = new WhatWeDo();
                 what.setId(rs.getInt(1));
-                what.setTitle(rs.getString(2));
-                what.setDescription(rs.getString(3));
-                what.setCover(rs.getString(8));
+                what.setTitle(rs.getString("title"));
+                what.setSubTitle(rs.getString("sub_title"));
+                what.setDescription(rs.getString("description"));
+                what.setCover(rs.getString("path"));
                 data.add(what);
             }
             return data;
@@ -52,8 +52,26 @@ public class WhatWeDos {
 
     }
 
-    public void create() {
-
+    public int create(WhatWeDo what,HttpServletResponse response) throws IOException {
+      String query="insert into what_we_dos(id,title,sub_title,description) values(?,?,?,?)";
+      int lastInsertedId=0;
+        try {
+            ps= connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, 0);
+            ps.setString(2, what.getTitle());
+            ps.setString(3, what.getSubTitle());
+            ps.setString(4, what.getDescription());
+            int result= ps.executeUpdate();
+            ResultSet rs2 = ps.getGeneratedKeys();
+            while (rs2.next()) {
+                lastInsertedId = rs2.getInt(1);
+            }
+            return lastInsertedId;
+        } catch (SQLException ex) {
+            Logger.getLogger(WhatWeDos.class.getName()).log(Level.SEVERE, null, ex);
+            response.getWriter().print(ex.getMessage());
+            return 0;
+        }
     }
 
     public WhatWeDo show(String id) throws IOException {
@@ -63,10 +81,10 @@ public class WhatWeDos {
             ps = connection.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
-                what.setId(rs.getInt(1));
-                what.setTitle(rs.getString(2));
-                what.setDescription(rs.getString(3));
-                what.setCover(rs.getString(8));
+                what.setId(rs.getInt("id"));
+                what.setTitle(rs.getString("title"));
+                what.setDescription(rs.getString("description"));
+                what.setCover(rs.getString("path"));
             }
             return what;
         } catch (SQLException ex) {

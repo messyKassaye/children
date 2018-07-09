@@ -5,10 +5,12 @@
  */
 package ORM;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletResponse;
 import models.Talent;
 
 /**
@@ -28,8 +30,20 @@ public class Talents {
         
     }
     
-    public void create(){
-        
+    public int create(Talent talent,HttpServletResponse response) throws IOException{
+        String query="insert into talents(id,children_id,talents) values(?,?,?)";
+        try {
+            ps= connection.prepareStatement(query);
+            ps.setInt(1, 0);
+            ps.setInt(2, Integer.parseInt(talent.getChild_id()));
+            ps.setString(3, talent.getTalent());
+            int result= ps.executeUpdate();
+           return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(Talents.class.getName()).log(Level.SEVERE, null, ex);
+            response.getWriter().print(ex.getMessage());
+            return 0;
+        }
     }
     
     public ArrayList<Talent> show(String childId){

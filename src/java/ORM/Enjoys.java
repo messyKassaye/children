@@ -5,11 +5,14 @@
  */
 package ORM;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletResponse;
 import models.Enjoy;
+import models.Talent;
 
 /**
  *
@@ -29,8 +32,20 @@ public class Enjoys {
         
     }
     
-    public void create(){
-        
+    public int  create(Enjoy enjoy,HttpServletResponse response) throws IOException{
+        String query="insert into enjoys(id,children_id,enjoys) values(?,?,?)";
+        try {
+            ps= connection.prepareStatement(query);
+            ps.setInt(1, 0);
+            ps.setInt(2, enjoy.getChildren_id());
+            ps.setString(3, enjoy.getEnjoys());
+            int result=ps.executeUpdate();
+            return result;
+        } catch (SQLException ex) {
+            Logger.getLogger(Enjoys.class.getName()).log(Level.SEVERE, null, ex);
+            response.getWriter().print(ex.getMessage());
+            return 0;
+        }
     }
     
     public ArrayList<Enjoy> show(String childId){

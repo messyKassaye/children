@@ -1,10 +1,15 @@
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="ORM.WhatWeDos"%>
+<%@page import="java.sql.Connection"%>
 <%@page import="models.WhatWeDo"%>
 <%@include file="header.jsp" %>
 <%@include file="navbar.jsp" %>
 <%
-    WhatWeDo data = (WhatWeDo) session.getAttribute("whatData");
-
+  Connection connection = (Connection) getServletContext().getAttribute("DbConnection");
+  WhatWeDos what =new WhatWeDos(connection);
+  String id=request.getParameter("id");
+  WhatWeDo what_data= what.show(id);
 %>
 
 <div class="container-fluid" style="margin-top: 50px;padding: 20px;">
@@ -12,8 +17,10 @@
 
         <div class="row">
             <div class="col-md-8 col-lg-8 col-sm-12 ">
-                <h2 class="text-success"><%=data.getTitle()%></h2>
-                <p><%=data.getDescription()%></p>
+                <h4 class="text-info"><%=what_data.getTitle() %></h4>
+                <p class="text-justify">
+                    <%=what_data.getDescription() %>
+                </p>
             </div>
             <div class="col-md-4 col-lg-4 col-sm-12" >
                 <div class="col-md-12 col-lg-12 my-div">

@@ -11,15 +11,26 @@ package models;
  */
 public class ChildrenAddress {
     private int id;
+    private int chldren_id;
     private String country;
     private String city;
 
-    public ChildrenAddress(int id, String country, String city) {
+    public ChildrenAddress(int id, int chldren_id, String country, String city) {
         this.id = id;
+        this.chldren_id = chldren_id;
         this.country = country;
         this.city = city;
     }
 
+    public int getChldren_id() {
+        return chldren_id;
+    }
+
+    public void setChldren_id(int chldren_id) {
+        this.chldren_id = chldren_id;
+    }
+
+    
     public ChildrenAddress() {
     }
 

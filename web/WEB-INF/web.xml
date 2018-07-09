@@ -2,6 +2,7 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <welcome-file-list>
         <welcome-file>index</welcome-file>
+        <welcome-file>>inde.jsp</welcome-file>
     </welcome-file-list>
     <!--- servlets  -->
     <servlet>
@@ -53,13 +54,13 @@
     <!--- end of servlet mapping -->
     <!--- filters -->
     <filter>
-        <filter-name>AuthenticationFilter</filter-name>
-        <filter-class>filters.AuthenticationFilter</filter-class>
+        <filter-name>Routing</filter-name>
+        <filter-class>filters.Routing</filter-class>
     </filter>
     <!--- end of filters -->
     <!--- filters mapping -->
     <filter-mapping>
-        <filter-name>AuthenticationFilter</filter-name>
+        <filter-name>Routing</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
     <!--- end of filter mapping -->
@@ -95,6 +96,12 @@
         <servlet-name>SponsorAchild</servlet-name>
         <url-pattern>/SponsorAchild</url-pattern>
     </servlet-mapping>
+    
+    
+    <context-param>
+        <param-name>ImagePath</param-name>
+        <param-value>http://localhost:8080/children/resources/images</param-value>
+    </context-param>
     <session-config>
         <session-timeout>
             30

@@ -5,18 +5,30 @@ import java.io.Serializable;
 public class WhatWeDo implements Serializable {
     private int id;
     private String title;
+    private String subTitle;
     private String description;
     private String cover;
 
     public WhatWeDo() {
     }
 
-    public WhatWeDo(String title, String description, String cover,int id) {
+    public WhatWeDo(int id, String title, String subTitle, String description, String cover) {
+        this.id = id;
         this.title = title;
+        this.subTitle = subTitle;
         this.description = description;
         this.cover = cover;
-        this.id=id;
     }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
+    }
+
+   
 
     public int getId() {
         return id;

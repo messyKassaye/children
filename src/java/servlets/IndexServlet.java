@@ -54,54 +54,59 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Connection connection = (Connection) getServletContext().getAttribute("DbConnection");
-        HttpSession session= request.getSession(true);
-         
+        HttpSession session = request.getSession(true);
+
         //finding featured child
-        Childrens childrenORM=new Childrens(connection);
-        Random feature_child=new Random();
-        int featuredChildId= feature_child.nextInt(childrenORM.index().size())+1;
-        Children child=childrenORM.show(""+featuredChildId);
-        
-        //address of featured child
-        ChildrenAddresses address= new ChildrenAddresses(connection);
-        ChildrenAddress child_address= address.show(""+featuredChildId,response);
-        
-        //enjoys of featured child
-        Enjoys enjoys= new Enjoys(connection);
-        ArrayList<Enjoy> enjoy_data=enjoys.show(""+featuredChildId);
-        session.setAttribute("enjoys", enjoy_data);
-        
-        //featured child talent
-        Talents talent= new Talents(connection);
-        ArrayList<Talent> talent_data=talent.show(""+featuredChildId);
-        session.setAttribute("talents", talent_data);
-        
-        //siblings of featured child
-        Siblings sibling= new Siblings(connection);
-        ArrayList<Sibling> sibling_data=sibling.show(""+featuredChildId);
-        session.setAttribute("siblings", sibling_data);
-        
-        ChildrenHouses house= new ChildrenHouses(connection);
-        ArrayList<ChildrenHouse> house_data=house.show(""+featuredChildId);
-        session.setAttribute("houses", house_data);
+        Childrens childrenORM = new Childrens(connection);
+        Random random = new Random();
+        ArrayList<Children> data = childrenORM.index();
+        if (data.size() > 0) {
+            ArrayList<Integer> randomData = new ArrayList<>();
+            for (int i = 0; i < data.size(); i++) {
+                randomData.add(data.get(i).getId());
+            }
+            int featuredChildId = randomData.get(random.nextInt(randomData.size()));
+            Children child = childrenORM.show("" + featuredChildId);
+
+            //address of featured child
+            ChildrenAddresses address = new ChildrenAddresses(connection);
+            ArrayList<ChildrenAddress> child_address = address.show("" + featuredChildId);
+
+            //enjoys of featured child
+            Enjoys enjoys = new Enjoys(connection);
+            ArrayList<Enjoy> enjoy_data = enjoys.show("" + featuredChildId);
+            session.setAttribute("enjoys", enjoy_data);
+
+            //featured child talent
+            Talents talent = new Talents(connection);
+            ArrayList<Talent> talent_data = talent.show("" + featuredChildId);
+            session.setAttribute("talents", talent_data);
+
+            //siblings of featured child
+            Siblings sibling = new Siblings(connection);
+            ArrayList<Sibling> sibling_data = sibling.show("" + featuredChildId,response);
+            session.setAttribute("siblings", sibling_data);
+
+            ChildrenHouses house = new ChildrenHouses(connection);
+            ArrayList<ChildrenHouse> house_data = house.show("" + featuredChildId);
+            session.setAttribute("houses", house_data);
+
+            session.setAttribute("featuredChild", child);
+            session.setAttribute("featuredChildAddress", child_address);
+        }
         //end of featured child
 
         //finding our works
-        WhatWeDos what= new WhatWeDos(connection);
-        ArrayList<WhatWeDo> whatData= what.index();
+        WhatWeDos what = new WhatWeDos(connection);
+        ArrayList<WhatWeDo> whatData = what.index();
         //end of our works
-        
+
         //testimony
-        Testimonials testimony=new Testimonials(connection);
-        ArrayList<Testimony> testimony_data= testimony.index(response);
-       session.setAttribute("testimony", testimony_data);
-        
-        
+        Testimonials testimony = new Testimonials(connection);
+        ArrayList<Testimony> testimony_data = testimony.index(response);
+        session.setAttribute("testimony", testimony_data);
         session.setAttribute("whatWedDo", whatData);
-        session.setAttribute("featuredChild", child);
-        session.setAttribute("featuredChildAddress", child_address);
-        response.sendRedirect("index.jsp");
-        
+        request.getRequestDispatcher("index.jsp").forward(request, response);
 
     }
 }

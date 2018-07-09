@@ -11,12 +11,24 @@ package models;
  */
 public class Enjoy {
     private int id;
+    private int children_id;
     private String enjoys;
 
-    public Enjoy(int id, String enjoys) {
+    public Enjoy(int id, int children_id, String enjoys) {
         this.id = id;
+        this.children_id = children_id;
         this.enjoys = enjoys;
     }
+
+    public int getChildren_id() {
+        return children_id;
+    }
+
+    public void setChildren_id(int children_id) {
+        this.children_id = children_id;
+    }
+
+    
 
     public Enjoy() {
     }

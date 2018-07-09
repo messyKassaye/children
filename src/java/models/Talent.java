@@ -11,12 +11,24 @@ package models;
  */
 public class Talent {
     private int id;
+    private String child_id;
     private String talent;
 
-    public Talent(int id, String talent) {
+    public Talent(int id, String child_id, String talent) {
         this.id = id;
+        this.child_id = child_id;
         this.talent = talent;
     }
+
+    public String getChild_id() {
+        return child_id;
+    }
+
+    public void setChild_id(String child_id) {
+        this.child_id = child_id;
+    }
+
+    
 
     public Talent() {
     }

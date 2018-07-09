@@ -17,13 +17,16 @@ public class Sibling {
     private String gender;
     private int birthDate;
 
-    public Sibling(int id, int childrenId, String firstName, String lastName, String gender) {
+    public Sibling(int id, int childrenId, String firstName, String lastName, String gender, int birthDate) {
         this.id = id;
         this.childrenId = childrenId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
+        this.birthDate = birthDate;
     }
+
+   
 
     public Sibling() {
     }

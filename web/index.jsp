@@ -23,7 +23,7 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item slides active">
-            <div class="slide-1" style="background-image: url(http://localhost:8080/Children/resources/images/kenay.jpg);"></div>
+            <div class="slide-1" style="background-image: url(http://localhost:8080/children/resources/images/kenay.jpg);"></div>
             <div class="hero">
                 <hgroup>
                     <h1>Create Hope</h1>
@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="item slides">
-            <div class="slide-2" style="background-image: url(http://localhost:8080/Children/resources/images/all.jpg);"></div>
+            <div class="slide-2" style="background-image: url(http://localhost:8080/children/resources/images/all.jpg);"></div>
             <div class="hero">
                 <hgroup>
                     <h1>Gift for children's</h1>
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="item slides">
-            <div class="slide-3" style="background-image: url(http://localhost:8080/Children/resources/images/circle-game.jpg);"></div>
+            <div class="slide-3" style="background-image: url(http://localhost:8080/children/resources/images/circle-game.jpg);"></div>
             <div class="hero">
                 <hgroup>
                     <h1>play with them</h1>
@@ -62,22 +62,24 @@
     <div class="row">
         <%
             ArrayList<WhatWeDo> what = (ArrayList) session.getAttribute("whatWedDo");
-            for (int i = 0; i < what.size(); i++) {
+            if (what.size() > 0) {
+                for (int i = 0; i < what.size(); i++) {
         %>
 
         <div class="col-md-4 col-g-4 col-sm-12">
             <div class="panel panel-primary my-panel">
                 <div class="panel-heading">
-                    <h4 class="title"><a href="What?id=<%=what.get(i).getId()%>" style="color: white;"><%= what.get(i).getTitle()%>
+                    <h4 class="title"><a href="what-we-do.jsp?id=<%=what.get(i).getId()%>" style="color: white;"><%= what.get(i).getTitle()%>
                         </a> </h4>
                 </div>
                 <div class="bg-overlay-1">
-                    <a href="What?id=<%=what.get(i).getId()%>"><img src="<%=what.get(i).getCover()%>" style="width:100%;height: 100%;"></a>
+                    <a href="what-we-do.jsp?id=<%=what.get(i).getId()%>"><img src="<%=what.get(i).getCover()%>" style="width:100%;height: 100%;"></a>
                 </div>
             </div>
         </div>
 
         <% }%>
+        <%} %>
 
     </div>
 </div>
@@ -103,7 +105,8 @@
             <div class="row">
                 <%
                     Children child = (Children) session.getAttribute("featuredChild");
-                    ChildrenAddress address = (ChildrenAddress) session.getAttribute("featuredChildAddress");
+                    ArrayList<ChildrenAddress> address = (ArrayList) session.getAttribute("featuredChildAddress");
+                    if (child != null) {
 
                 %>
                 <div class="col-md-3 featured-child">
@@ -115,7 +118,7 @@
 
                     <span style="font-size: 12pt;margin-bottom: 10px;">Change the Story for</span><br>
                     <span class="text-success" style="font-size: 20pt;"><%=child.getFirstName() + "  " + child.getLastName()%></span><br>
-                    <span class="text-center"><%=child.getBirthDate()%> Years old</span>
+                    <span class="text-center"><%=child.getAge()%> Years old</span>
                     <span                    style="border: 0;
                                              margin-bottom: 20px;
                                              height: 10px;
@@ -123,7 +126,11 @@
                                              background-image: linear-gradient(to right,rgba(0,0,0,0),rgba(0,0,0,0.75),rgba(0,0,0,0));">
 
                     </span><br>
-                    <p><span><%=address.getCountry()%> ,<%=address.getCity()%></span></p>
+                    <%
+                        if (address.size() > 0) {
+                    %>
+                    <p><span><%=address.get(0).getCountry()%> ,<%=address.get(0).getCity()%></span></p>
+                    <%} %>
                     <%
                         if (child.getGender().contains("female")) {
 
@@ -135,6 +142,8 @@
 
                     <%}%>
                 </div>
+
+                <%}%>
             </div>
         </div>
     </div>
@@ -272,7 +281,7 @@
 <!---------     end of help          ------------->
 
 <!--------- gift starts here --------------------->
-<div class="container-fluid gift" style="background-image: url(http://localhost:8080/Children/resources/images/children.jpg);
+<div class="container-fluid gift" style="background-image: url(http://localhost:8080/children/resources/images/children.jpg);
      background-repeat: no-repeat;
      margin-top: 40px;
      background-size:100%;

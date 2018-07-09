@@ -20,8 +20,9 @@ public class Children {
     private String history;
     private String family_income;
     private String sponsors_saying;
-    private int birthDate;
     private String profile_pic;
+    private String age;
+    private String country;
 
     public Children(int id, String firstName, String lastName, String gender, String livesWith, String speaks, String schools, String history, String sponsors_saying) {
         this.id = id;
@@ -110,13 +111,6 @@ public class Children {
         this.sponsors_saying = sponsors_saying;
     }
 
-    public int getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(int birthDate) {
-        this.birthDate = birthDate;
-    }
 
     
 
@@ -134,6 +128,24 @@ public class Children {
 
     public void setFamily_income(String family_income) {
         this.family_income = family_income;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+   
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
     
     
